@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/templatePrincipal.xhtml">
+	<ui:define name="corpo">
+		<p:panel id="panelPageInicial" style="">
+		<f:view contentType="text/html" ></f:view>
+	
+	<!-- Maps API Javascript -->
+        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAL1ZVnfLeo2sRfSz_oNOkjtGa2SGJtrh4&amp;sensor=false"></script>
+ 
+        <!-- Arquivo de inicialização do mapa -->
+        <script src="javascript/mapa.js"></script>
+	
+		<p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" />
+	
+	 <!-- Caixa de informação -->
+        <script src="javascript/infobox.js"></script>
+		
+        <!-- Agrupamento dos marcadores -->
+		<script src="javascript/markerclusterer.js"></script>
+ 
+      
+			
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

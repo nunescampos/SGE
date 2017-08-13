@@ -1,0 +1,21 @@
+CREATE ROLE sge login encrypted password 'md52f8b4c4269e34d23a5c163a9ceb59c0b' superuser inherit createdb createrole REPLICATION;
+
+CREATE DATABASE  sge WITH OWNER = caixaki encoding = 'UTF8' tablespace = pg_default connection limit = - 1;
+
+
+CREATE TABLE entidade1 (ent_codigo BIGINT NOT NULL,ent_senha VARCHAR(20) NOT NULL,ent_login VARCHAR(20) NOT NULL,ent_inativo boolean NOT NULL,CONSTRAINT entidade_pkey PRIMARY KEY (ent_codigo),CONSTRAINT entidade_ent_login_key UNIQUE (ent_login))  WITH (OIDS = FALSE);
+
+ALTER TABLE entidade1 OWNER TO sge;
+
+CREATE INDEX xlogin ON entidade1 USING btree (ent_login COLLATE pg_catalog."default");
+
+CREATE TABLE entidadeacesso1 (ent_codigo BIGINT NOT NULL,esa_codigo VARCHAR(70) NOT NULL,CONSTRAINT ent_codigo_fk FOREIGN KEY (ent_codigo) REFERENCES entidade1(ent_codigo) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION) WITH (OIDS = FALSE);
+
+ALTER TABLE entidadeacesso1 OWNER TO sge;
+
+ALTER USER sge PASSWORD 'admin';
+
+select * from entidade1;
+INSERT INTO entidadeacesso1 (ent_codigo, esa_codigo) VALUES (3, 'USER');
+
+INSERT INTO entidadeacesso1 (ent_codigo, esa_codigo) VALUES (3, 'ADMIN');
